@@ -1,0 +1,158 @@
+---
+import { menuLinks } from "@/site-config";
+
+import Search from "../Search.astro";
+import ThemeToggle from "../ThemeToggle.astro";
+
+const url = new URL(Astro.request.url);
+const currentSemester: 1 | 2 = 2;
+---
+
+<header class="group relative mb-28 flex items-center sm:ps-[4.5rem]" id="main-header">
+	<div class="flex sm:flex-col">
+		<a
+			aria-current={url.pathname === "/" ? "page" : false}
+			class="inline-flex items-center grayscale hover:filter-none sm:relative sm:inline-block"
+			href="/"
+		>
+			<svg
+				width="60"
+				height="60"
+				viewBox="0 0 60 60"
+				fill="none"
+				xmlns="http://www.w3.org/2000/svg"
+				class="me-3 h-10 w-6 sm:absolute sm:start-[-4.5rem] sm:me-0 sm:h-20 sm:w-12"
+			>
+				<g clip-path="url(#clip0_510_68)">
+					<path
+						d="M30 22.5H12.5C11.1739 22.5 9.90215 23.0268 8.96447 23.9645C8.02678 24.9021 7.5 26.1739 7.5 27.5V37.5C7.5 38.8261 8.02678 40.0979 8.96447 41.0355C9.90215 41.9732 11.1739 42.5 12.5 42.5H20"
+						stroke="#4DABF7"
+						stroke-width="3"
+						stroke-linecap="round"
+						stroke-linejoin="round"></path>
+					<path
+						d="M30 37.5H47.5C48.8261 37.5 50.0979 36.9732 51.0355 36.0355C51.9732 35.0979 52.5 33.8261 52.5 32.5V22.5C52.5 21.1739 51.9732 19.9021 51.0355 18.9645C50.0979 18.0268 48.8261 17.5 47.5 17.5H40"
+						stroke="#4DABF7"
+						stroke-width="3"
+						stroke-linecap="round"
+						stroke-linejoin="round"></path>
+					<path
+						d="M20 22.5V12.5C20 11.1739 20.5268 9.90215 21.4645 8.96447C22.4021 8.02678 23.6739 7.5 25 7.5H35C36.3261 7.5 37.5979 8.02678 38.5355 8.96447C39.4732 9.90215 40 11.1739 40 12.5V25C40 26.3261 39.4732 27.5979 38.5355 28.5355C37.5979 29.4732 36.3261 30 35 30H25C23.6739 30 22.4021 30.5268 21.4645 31.4645C20.5268 32.4021 20 33.6739 20 35V47.5C20 48.8261 20.5268 50.0979 21.4645 51.0355C22.4021 51.9732 23.6739 52.5 25 52.5H35C36.3261 52.5 37.5979 51.9732 38.5355 51.0355C39.4732 50.0979 40 48.8261 40 47.5V37.5"
+						stroke="#4DABF7"
+						stroke-width="3"
+						stroke-linecap="round"
+						stroke-linejoin="round"></path>
+					<path
+						d="M27.5 15V15.0242"
+						stroke="#4DABF7"
+						stroke-width="3"
+						stroke-linecap="round"
+						stroke-linejoin="round"></path>
+					<path
+						d="M32.5 45V45.0242"
+						stroke="#4DABF7"
+						stroke-width="3"
+						stroke-linecap="round"
+						stroke-linejoin="round"></path>
+				</g>
+				<defs>
+					<clipPath id="clip0_510_68">
+						<rect width="60" height="60" fill="white"></rect>
+					</clipPath>
+				</defs>
+			</svg>
+
+			<span class="text-md hidden font-bold sm:block sm:text-2xl">Foundations of Computing</span>
+			<p class="text-md font-semibold sm:text-lg">
+				COMP10001
+				<span class="text-accent">Semester {currentSemester}</span>
+			</p>
+		</a>
+		<nav
+			aria-label="Main menu"
+			class="absolute -inset-x-4 top-14 hidden flex-col items-end gap-y-4 rounded-md bg-bgColor/[.85] py-4 text-accent shadow backdrop-blur group-[.menu-open]:z-50 group-[.menu-open]:flex sm:static sm:z-auto sm:-ms-4 sm:mt-1 sm:flex sm:flex-row sm:items-center sm:divide-x sm:divide-dashed sm:divide-accent sm:rounded-none sm:bg-transparent sm:py-0 sm:shadow-none sm:backdrop-blur-none"
+			id="navigation-menu"
+		>
+			{
+				menuLinks.map((link) => (
+					<a
+						aria-current={url.pathname === link.path ? "page" : false}
+						class="px-4 py-4 underline-offset-2 sm:py-0 sm:hover:underline"
+						data-astro-prefetch
+						href={link.path}
+					>
+						{link.title}
+					</a>
+				))
+			}
+		</nav>
+	</div>
+	<Search />
+	<ThemeToggle />
+	<mobile-button>
+		<button
+			aria-expanded="false"
+			aria-haspopup="menu"
+			aria-label="Open main menu"
+			class="group relative ms-4 h-7 w-7 sm:invisible sm:hidden"
+			id="toggle-navigation-menu"
+			type="button"
+		>
+			<svg
+				aria-hidden="true"
+				class="absolute start-1/2 top-1/2 h-full w-full -translate-x-1/2 -translate-y-1/2 transition-all group-aria-expanded:scale-0 group-aria-expanded:opacity-0"
+				fill="none"
+				focusable="false"
+				id="line-svg"
+				stroke="currentColor"
+				stroke-width="1.5"
+				viewBox="0 0 24 24"
+				xmlns="http://www.w3.org/2000/svg"
+			>
+				<path d="M3.75 9h16.5m-16.5 6.75h16.5" stroke-linecap="round" stroke-linejoin="round"
+				></path>
+			</svg>
+			<svg
+				aria-hidden="true"
+				class="absolute start-1/2 top-1/2 h-full w-full -translate-x-1/2 -translate-y-1/2 scale-0 text-accent opacity-0 transition-all group-aria-expanded:scale-100 group-aria-expanded:opacity-100"
+				class="text-accent"
+				fill="none"
+				focusable="false"
+				id="cross-svg"
+				stroke="currentColor"
+				stroke-width="1.5"
+				viewBox="0 0 24 24"
+				xmlns="http://www.w3.org/2000/svg"
+			>
+				<path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"></path>
+			</svg>
+		</button>
+	</mobile-button>
+</header>
+
+<script>
+	import { toggleClass } from "@/utils";
+
+	class MobileNavBtn extends HTMLElement {
+		private headerEl: HTMLElement;
+		private menuOpen: boolean;
+		private mobileButtonEl: HTMLButtonElement;
+
+		toggleMobileMenu = () => {
+			toggleClass(this.headerEl, "menu-open");
+			this.menuOpen = !this.menuOpen;
+			this.mobileButtonEl.setAttribute("aria-expanded", this.menuOpen.toString());
+		};
+
+		constructor() {
+			super();
+			this.headerEl = document.getElementById("main-header")!;
+			this.mobileButtonEl = this.querySelector("button") as HTMLButtonElement;
+			this.menuOpen = false;
+
+			this.mobileButtonEl.addEventListener("click", this.toggleMobileMenu);
+		}
+	}
+
+	customElements.define("mobile-button", MobileNavBtn);
+</script>

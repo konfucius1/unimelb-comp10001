@@ -1,0 +1,19 @@
+---
+import { Image } from "astro:assets";
+
+const { title, description, job, imagePath, email } = Astro.props;
+const images = import.meta.glob<{ default: ImageMetadata }>(
+	"../assets/staffs/*.{jpeg,jpg,png,gif}"
+);
+
+if (!images[imagePath])
+	throw new Error(`"${imagePath}" does not exist in glob: "../assets/staffs/*.{jpeg,jpg,png,gif}"`);
+---
+
+<li class="rounded-2xl px-8 py-10">
+	<Image class="rounded-2xl" src={images[imagePath]!()} alt={title} />
+	<h3 class="mt-6 text-base font-semibold leading-7 tracking-tight">{title}</h3>
+	<p class="text-sm leading-6">{description}</p>
+	<p class="text-sm leading-6">{job}</p>
+	<a href={email} class="cactus-link">{email}</a>
+</li>

@@ -1,0 +1,41 @@
+---
+import PageLayout from "@/layouts/Base.astro";
+const allInfos = await Astro.glob("../pages/infos/*.md");
+---
+
+<PageLayout meta={{ title: "Subject Info" }}>
+	<div class="space-y-6">
+		<h1 class="title">Subject Info</h1>
+
+		<ul class="space-y-4">
+			<li>
+				<a class="cactus-link" href="/infos/staff">Teaching team</a>
+			</li>
+			{
+				allInfos.map((info) => (
+					<li>
+						<a class="cactus-link" href={info.url}>
+							{info.frontmatter.title}
+						</a>
+					</li>
+				))
+			}
+
+			<!-- <li>
+				<a class="cactus-link" href="/infos/schedule">Schedule</a>
+			</li>
+			<li>
+				<a class="cactus-link" href="/infos/lectures-and-workshop">Lectures & Workshops</a>
+			</li>
+			<li>
+				<a class="cactus-link" href="/infos/academic-honesty">Academic Honesty</a>
+			</li>
+			<li>
+				<a class="cactus-link" href="/infos/teaching-style">Teaching Style</a>
+			</li>
+			<li>
+				<a class="cactus-link" href="/infos/handbook">Handbook</a>
+			</li> -->
+		</ul>
+	</div>
+</PageLayout>

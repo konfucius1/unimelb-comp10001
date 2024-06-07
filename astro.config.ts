@@ -6,10 +6,8 @@ import expressiveCode from "astro-expressive-code";
 import icon from "astro-icon";
 import fs from "fs";
 import rehypeExternalLinks from "rehype-external-links";
-import remarkUnwrapImages from "remark-unwrap-images";
 
 import { expressiveCodeOptions } from "./src/site.config";
-import { remarkReadingTime } from "./src/utils/remark-reading-time";
 
 // https://astro.build/config
 export default defineConfig({
@@ -35,7 +33,6 @@ export default defineConfig({
 				},
 			],
 		],
-		remarkPlugins: [remarkUnwrapImages, remarkReadingTime],
 		remarkRehype: {
 			footnoteLabelProperties: {
 				className: [""],
